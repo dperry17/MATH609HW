@@ -1,0 +1,103 @@
+\documentclass{report}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, mathtools}
+
+\title{Homework 1}
+
+\author{Darin Peries}
+
+\begin{date} {\today} \end{date}
+
+\begin{document}
+\maketitle
+
+\noindent \textbf{Problem 1 part 1}
+
+A matrix $A$ is invertible if $det(A) \neq 0$. To show that a monomial matrix is invertible, 
+the same property must apply. To prove that a monomial matrix is invertible, we will take the 
+determinient of the base case, a $2 \times 2$ matrix, and the inductive case, a $k \times k$ matrix with $k > 2$, are both 
+non zero. \\
+
+Say $A \in \Re^{2 \times 2}$ is a monomial matrix. The deterinant of A is $ad - cb$, where 
+the variables come from $\begin{psmallmatrix}  a & b \\ c & d  \end{psmallmatrix}$. Since the
+matrix is monomial, either $ac$ or $-bd$ evaluates zero, as there can only be one non-zero value 
+per column and row in the matrix. Therefore, $det(A) \ne 0$. \\
+
+For the inductive step, where $A \in \Re^{k \times k}$, the determinient can be calculated in the same way as a diagonal matrix, the product of all non-zero entries of the matrix.
+A monomial matrix requires that A only has one non-zero entry per row and column, the same as a diagonal matrix. To convert a monomial matrix to
+a diagonal matrix, the rows of the matrix need to be rearranged where $A_{ii} \neq 0$. In a $2 \times 2$ monomial matrix, re arranging the rows affects the determinient
+as follows, $bd - ac$. The tranformation is just multiplying the the determinant by -1. If we apply another rarranging of the rows, the determinant
+goes back to its original formulation, essentially ultiplying the determinant by $-1^2$. Applying this to a general case, if rearranging $l$ rows of a matrix results in
+the deterinant being multiplied by $(-1)^l$, then the determinant of a monomial matrix is, after rearranging the rows to make it diagonal, $(-1)^l \prod\limits_{i=1}^{n} (A_{ii})$,
+where $l$ is the number of row swaps being made. Therefore, for a $k \times k$ monomial matrix, the determinant is non-zero. By proof of induction, a monomial matrix is invertible. \\\\
+
+
+\noindent \textbf{Problem 1 part 2}
+
+Given $A$ is skew symmetric, $A^{\mathbf{T}}=-A$. In quadratic form, $x^{\mathbf{T}}Ax=0$.
+By transposing the entire expression, $(x^TAx=0)^T=xA^Tx^T=x(-A)x^T$. The resulting expression is $x^TAx=-xAx^T$, rewritting it 
+as $2x^TAx=0$ and $x^TAx=0$. Therefore $x^TAx=0$. \\\\
+
+\noindent \textbf{Problem 2 part 1} \\
+
+$P_2E_1 = \begin{psmallmatrix}  1 & 0 & 0 & 0 \\ l_{41} & 0 & 0 & 1 \\ l_{21} & 1 & 0 & 0 \\ l_{31} & 0 & 1 & 0   \end{psmallmatrix}$. 
+$P_2^{-1}=P_2$ since the gaussian elimination only requires the swapping of rows 4, 2 and 3 on the identity matrix. $P_2E_1P_2^{-1} = P_2E_1P_2 = \tilde{E_1}$. \\
+
+$$\tilde{E_1} = \begin{psmallmatrix} 1 & 0 & 0 & 0 \\ l_{41} & 0 & 1 & 0 \\ l_{21} & 0 & 0 & 1 \\ l_{31} & 1 & 0 & 0 \end{psmallmatrix}$$.\\\\
+
+
+
+\noindent \textbf{Problem 2 part 2} \\
+
+$\tilde{E_k}$ is different from $E_k$ by the fact that $\tilde{E_k}$ has both its rows $i, \ j$ and columns $i, \ j$
+permuted. As seen by the first part of this problem, when $E_k$ is multiplied by the permutation matrix from the 
+left, only the rows of the $E_k$ are permuted. If it is multiplied from its right, its columns are permutted.
+Since $\tilde{E_k}$ needs to equal $E_k$ with its rows permuted, $\tilde{E_k}$ needs to have both its rows and columns
+permutted to satisfy the equation.\\\\
+
+\noindent \textbf{Problem 3 part 1}
+
+In order to get $A=LU$, the following row operations need to be executed.
+
+\begin{enumerate}
+    \item $R_2 = R_2 - (2R_1)$
+    \item $R_3 = R_3 - (\frac{3}{2}R_2)$
+\end{enumerate}
+
+This results in $L = \begin{psmallmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ 0 & \frac{3}{2} & 1 \end{psmallmatrix}$
+and $U= \begin{psmallmatrix} 6 & 10 & 0 \\ 0 & 6 & 4 \\ 0 & 0 & 6 \end{psmallmatrix}$. \\
+
+To solve for $Ly=b$, we use forward substitution, where $y_1 = 4, \ y_2 = 2, \ y_3 = -6$. Then, to solve
+$Ux = y$, we use backwards substitution, where $x_3 = -1, \  x_2 = 1, \ x_1 = -1$.\\ \\
+
+\noindent \textbf{Problem 3 part 2}
+
+$$ A = \begin{pmatrix} 1 & -5 & 1 \\ 10 & 0 & 20 \\ 5 & 0 & -1 \end{pmatrix}, \ b = \begin{pmatrix} 7 \\ 6 \\ 4 \end{pmatrix}$$
+
+In order to solve this, we need to create a permutation matrix $P$ by swapping the first row with the second row of $A$.
+
+$$ P = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \ 
+\tilde{A} = \begin{pmatrix} 10 & 0 & 20 \\ 1 & -5 & 1 \\ 5 & 0 & -1 \end{pmatrix}, \ 
+\tilde{b} = \begin{pmatrix} 6 \\ 7 \\ 4 \end{pmatrix}$$
+
+Now we can use row operations to obtain $PA=LU$. The row operations are as follows.
+
+\begin{enumerate}
+    \item $R_2 = R_2 - (\frac{1}{10} R_1)$
+    \item $R_3 = R_3 - (\frac{1}{2} R_1)$
+\end{enumerate}
+
+$L = \begin{pmatrix} 1 & 0 & 0 \\ \frac{1}{10} & 1 & 0 \\ \frac{1}{2} & 0 & 1 \end{pmatrix}, \ 
+U = \begin{pmatrix} 10 & 0 & 20 \\ 0 & -5 & -1 \\ 0 & 0 & -11 \end{pmatrix}$. \\
+
+\noindent With both triangular matrices, we can solve $Ly=b$, where $y_1 = 6, \ y_2 = \frac{32}{5}, \ y_3 = 1$.
+Solving $Ux=y$ gives $x_3 = \frac{-1}{11}, \ x_2 = \frac{-347}{275}, \ x_1 = \frac{86}{110}$.
+
+$$x = \begin{pmatrix} \frac{86}{110} \\\\ \frac{-347}{275} \\\\ \frac{-1}{11} \end{pmatrix}$$\\\\
+
+\noindent \textbf{Problem 4}
+
+
+
+\end{document}
