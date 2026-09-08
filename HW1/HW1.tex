@@ -50,6 +50,16 @@ $$\tilde{E_1} = \begin{psmallmatrix} 1 & 0 & 0 & 0 \\ l_{41} & 0 & 1 & 0 \\ l_{2
 
 \noindent \textbf{Problem 2 part 2} \\
 
+In Gaussian Elimination, all elements that need to be zero'd out are below the main diagonal, 
+or below the rows of the $k^{th}$ pivot. This can be written in the form $E_k = I - m_ke^T_k$, where
+$e_k^T$ is the $k^{th}$ column vector in a n-dimensional basis transposed and $m_k$ is a column vector with 
+the necessary row operations applied to it. If the left hand side is multiplied by 
+the permutation matrix from the left, the resulting expression is $P^i_jE_k = P^i_j - (P^i_jm_k)e^T_k$.
+The same type of expression can be applied to $\tilde{E_k}P^i_j=P^i_j - \tilde{m_k}e^T_kP^i_j$. If the two
+expressions are set to equal each other, the expression is $-\tilde{m_k}e^TP^i_j =-P^i_jm_ke^T$. This expression
+holds if $(P^i_j)^{-1}\tilde{m_k}e^TP^i_j = P^i_jm_ke^T(P^i_j)^{-1}$. Since the inverse of a permutation matrix
+is itself, the expression $P^i_jE_k=\tilde{E_k}P^i_j$ always holds, assuming $i<j<k$ so no $i=j$. 
+
 $\tilde{E_k}$ is different from $E_k$ by the fact that $\tilde{E_k}$ has both its rows $i, \ j$ and columns $i, \ j$
 permuted. As seen by the first part of this problem, when $E_k$ is multiplied by the permutation matrix from the 
 left, only the rows of the $E_k$ are permuted. If it is multiplied from its right, its columns are permutted.
@@ -71,13 +81,14 @@ and $U= \begin{psmallmatrix} 6 & 10 & 0 \\ 0 & 6 & 4 \\ 0 & 0 & 6 \end{psmallmat
 To solve for $Ly=b$, we use forward substitution, where $y_1 = 4, \ y_2 = 10 - 8 = 2, \ y_3 = -3 -3/2 \ *\ (2) = -3 - 3 = -6$. Then, to solve
 $Ux = y$, we use backwards substitution, where $x_3 = -6/6=-1, \  x_2 = (4+2)/6 = 1, \ x_1 = (4-10)/6 = -1$.\\ 
 
-$x = \begin{pmatrix} -1 \\ 1 \\ -1 \end{pmatrix}$\\\\
+$$x = \begin{pmatrix} -1 \\ 1 \\ -1 \end{pmatrix}$$\\\\
 
 \noindent \textbf{Problem 3 part 2}
 
 $$ A = \begin{pmatrix} 1 & -5 & 1 \\ 10 & 0 & 20 \\ 5 & 0 & -1 \end{pmatrix}, \ b = \begin{pmatrix} 7 \\ 6 \\ 4 \end{pmatrix}$$
 
-In order to solve this, we need to create a permutation matrix $P$ by swapping the first row with the second row of $A$.
+In order to solve this, we need to create a permutation matrix $P$ by swapping the first row with the second row of $A$. 
+Apply this same tranformation to $b$ to get $\tilde{b}$.
 
 $$ P = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \ 
 \tilde{A} = \begin{pmatrix} 10 & 0 & 20 \\ 1 & -5 & 1 \\ 5 & 0 & -1 \end{pmatrix}, \ 
