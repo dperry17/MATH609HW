@@ -1,7 +1,7 @@
 \documentclass{report}
 
 \usepackage[margin=0.5in]{geometry}
-\usepackage{amsmath, mathtools}
+\usepackage{amsmath, mathtools, array, booktabs}
 
 \title{Homework 1}
 
@@ -28,7 +28,7 @@ For the inductive step, where $A \in \Re^{k \times k}$, the determinient can be 
 A monomial matrix requires that A only has one non-zero entry per row and column, the same as a diagonal matrix. To convert a monomial matrix to
 a diagonal matrix, the rows of the matrix need to be rearranged where $A_{ii} \neq 0$. In a $2 \times 2$ monomial matrix, re arranging the rows affects the determinient
 as follows, $bd - ac$. The tranformation is just multiplying the the determinant by -1. If we apply another rarranging of the rows, the determinant
-goes back to its original formulation, essentially ultiplying the determinant by $-1^2$. Applying this to a general case, if rearranging $l$ rows of a matrix results in
+goes back to its original formulation, essentially multiplying the determinant by $-1^2$. Applying this to a general case, if rearranging $l$ rows of a matrix results in
 the deterinant being multiplied by $(-1)^l$, then the determinant of a monomial matrix is, after rearranging the rows to make it diagonal, $(-1)^l \prod\limits_{i=1}^{n} (A_{ii})$,
 where $l$ is the number of row swaps being made. Therefore, for a $k \times k$ monomial matrix, the determinant is non-zero. By proof of induction, a monomial matrix is invertible. \\\\
 
@@ -36,8 +36,8 @@ where $l$ is the number of row swaps being made. Therefore, for a $k \times k$ m
 \noindent \textbf{Problem 1 part 2}
 
 Given $A$ is skew symmetric, $A^{\mathbf{T}}=-A$. In quadratic form, $x^{\mathbf{T}}Ax=0$.
-By transposing the entire expression, $(x^TAx=0)^T=xA^Tx^T=x(-A)x^T$. The resulting expression is $x^TAx=-xAx^T$, rewritting it 
-as $2x^TAx=0$ and $x^TAx=0$. Therefore $x^TAx=0$. \\\\
+By transposing the entire expression, $(x^TAx=0)^T=xA^Tx^T=x(-A)x^T$. The resulting expression is $x^TAx=-xAx^T$, Adding the right hand side to the left gives us $2x^TAx=0$, 
+rewrittting the equation as $x^TAx=0$ by dividing by 2. Therefore $x^TAx=0$. \\\\
 
 \noindent \textbf{Problem 2 part 1} \\
 
@@ -68,8 +68,10 @@ In order to get $A=LU$, the following row operations need to be executed.
 This results in $L = \begin{psmallmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ 0 & \frac{3}{2} & 1 \end{psmallmatrix}$
 and $U= \begin{psmallmatrix} 6 & 10 & 0 \\ 0 & 6 & 4 \\ 0 & 0 & 6 \end{psmallmatrix}$. \\
 
-To solve for $Ly=b$, we use forward substitution, where $y_1 = 4, \ y_2 = 2, \ y_3 = -6$. Then, to solve
-$Ux = y$, we use backwards substitution, where $x_3 = -1, \  x_2 = 1, \ x_1 = -1$.\\ \\
+To solve for $Ly=b$, we use forward substitution, where $y_1 = 4, \ y_2 = 10 - 8 = 2, \ y_3 = -3 -3/2 \ *\ (2) = -3 - 3 = -6$. Then, to solve
+$Ux = y$, we use backwards substitution, where $x_3 = -6/6=-1, \  x_2 = (4+2)/6 = 1, \ x_1 = (4-10)/6 = -1$.\\ 
+
+$x = \begin{pmatrix} -1 \\ 1 \\ -1 \end{pmatrix}$\\\\
 
 \noindent \textbf{Problem 3 part 2}
 
@@ -91,13 +93,116 @@ Now we can use row operations to obtain $PA=LU$. The row operations are as follo
 $L = \begin{pmatrix} 1 & 0 & 0 \\ \frac{1}{10} & 1 & 0 \\ \frac{1}{2} & 0 & 1 \end{pmatrix}, \ 
 U = \begin{pmatrix} 10 & 0 & 20 \\ 0 & -5 & -1 \\ 0 & 0 & -11 \end{pmatrix}$. \\
 
-\noindent With both triangular matrices, we can solve $Ly=b$, where $y_1 = 6, \ y_2 = \frac{32}{5}, \ y_3 = 1$.
-Solving $Ux=y$ gives $x_3 = \frac{-1}{11}, \ x_2 = \frac{-347}{275}, \ x_1 = \frac{86}{110}$.
+\noindent With both triangular matrices, we can solve $Ly=b$, where $y_1 = 6, \ y_2 =7 - \frac{6}{10} = \frac{32}{5}, \ y_3 =4 -  \frac{32}{5} * \frac{1}{2} = 1$.
+Solving $Ux=y$ gives $x_3 = \frac{-1}{11}, \ x_2 =\frac{\frac{32}{5} - \frac{1}{11}}{5} = \frac{-347}{275}, 
+\ x_1 = \frac{6 + 20 * \frac{1}{11}}{10} = \frac{86}{110}$.
 
 $$x = \begin{pmatrix} \frac{86}{110} \\\\ \frac{-347}{275} \\\\ \frac{-1}{11} \end{pmatrix}$$\\\\
 
 \noindent \textbf{Problem 4}
 
+The following graphs plot $(x_i, \ u_i)$ for each $n=1, \ 2, \ \dots, \ 8$.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_1.png}
+    \label{fig:1}
+    \caption{the solution to the system $u_i$ with $n=1$ and $x_i$}
+\end{figure}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_2.png}
+    \label{fig:2}
+    \caption{the solution to the system $u_i$ with $n=2$ and $x_i$}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_3.png}
+    \label{fig:3}
+    \caption{the solution to the system $u_i$ with $n=3$ and $x_i$}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_4.png}
+    \label{fig:4}
+    \caption{the solution to the system $u_i$ with $n=4$ and $x_i$}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_5.png}
+    \label{fig:5}
+    \caption{the solution to the system $u_i$ with $n=5$ and $x_i$}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_6.png}
+    \label{fig:6}
+    \caption{the solution to the system $u_i$ with $n=6$ and $x_i$}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_7.png}
+    \label{fig:7}
+    \caption{the solution to the system $u_i$ with $n=7$ and $x_i$}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6 \linewidth]{figs/p4_sol_size_8.png}
+    \label{fig:8}
+    \caption{the solution to the system $u_i$ with $n=8$ and $x_i$}
+\end{figure}
+
+\clearpage
+
+\noindent \textbf{Problem 5}
+
+The table below shows the solution to the problem defined in the document.
+
+\begin{table}[htbp]
+\centering
+\caption{Solutions for matrix for every $n$}
+\small
+\begin{tabular}{@{}cl@{}}
+\toprule
+$n$ & Solutions \\
+\midrule
+4 & $[10.0019,\ 0.0551,\ 0.0177,\ 0.6021]$ \\
+5 & $[14.6843,\ 8.743\times10^{-3},\ 5.212\times10^{-4},\ 1.570\times10^{-5},\ 1.0185]$ \\
+6 & $[27.3270,\ 2.438\times10^{-3},\ 2.620\times10^{-5},\ 2.328\times10^{-7},\ -1.177\times10^{-9},\ 1.1146]$ \\
+7 & $[54.7108,\ 6.207\times10^{-4},\ 1.110\times10^{-6},\ -8.239\times10^{-9},\ 0,\ 0,\ 1.1295]$ \\
+8 & $[111.3813,\ 1.266\times10^{-4},\ 3.279\times10^{-8},\ 1.191\times10^{-11},\ 1.316\times10^{-13},\ 0,\ 0,\ 1.1220]$ \\
+9 & $[226.7041,\ 2.103\times10^{-5},\ 7.008\times10^{-10},\ 0,\ 2.768\times10^{-12},\ -1.723\times10^{-13},\ 1.513\times10^{-14},\ 1.881\times10^{-15},\ 1.1105]$ \\
+10 & $[459.8511,\ 2.950\times10^{-6},\ 4.459\times10^{-10},\ 0,\ -7.022\times10^{-11},\ 0,\ -3.755\times10^{-13},\ 0,\ 2.427\times10^{-15},\ 1.0999]$ \\
+11 & $[929.9248,\ 3.597\times10^{-7},\ -2.130\times10^{-9},\ 0,\ 0,\ -4.309\times10^{-11},\ -2.916\times10^{-12},\ 0,\ -1.809\times10^{-14},\ 0,\ 1.0909]$ \\
+12 & $[1876.3377,\ 5.979\times10^{-8},\ 3.722\times10^{-8},\ 0,\ -9.063\times10^{-8},\ -7.858\times10^{-10},\ -7.323\times10^{-11},\ -3.780\times10^{-12},\ 0,\ -2.371\times10^{-14},\ 0,\ 1.0833]$ \\
+13 & $[3779.9242,\ -9.553\times10^{-7},\ 0,\ 0,\ 0,\ 3.410\times10^{-8},\ -1.838\times10^{-9},\ 0,\ 1.417\times10^{-11},\ -5.747\times10^{-13},\ 0,\ 0,\ 1.0769]$ \\
+14 & $[7605.8574,\ 1.527\times10^{-5},\ 0,\ 0,\ 0,\ -5.205\times10^{-7},\ -2.613\times10^{-8},\ 2.506\times10^{-9},\ 0,\ -1.118\times10^{-11},\ -4.824\times10^{-13},\ 0,\ 2.961\times10^{-15},\ 1.0714]$ \\
+15 & $[15290.7327,\ 0,\ 0,\ 0,\ 0,\ 2.208\times10^{-5},\ -7.359\times10^{-7},\ 0,\ -2.509\times10^{-9},\ 0,\ 0,\ -6.113\times10^{-13},\ 0,\ 2.388\times10^{-15},\ 1.0667]$ \\
+16 & $[30719.0000,\ 0,\ 0,\ 0,\ 0,\ 0,\ 0,\ 1.055\times10^{-6},\ 0,\ 2.878\times10^{-9},\ -2.352\times10^{-10},\ 0,\ -1.887\times10^{-12},\ 4.626\times10^{-14},\ 0,\ 1.0625]$ \\
+17 & $[61680.0821,\ 0.2500,\ -0.1521,\ 0,\ 0,\ 0,\ -5.123\times10^{-4},\ 0,\ 0,\ 8.848\times10^{-8},\ -4.309\times10^{-9},\ 0,\ -1.456\times10^{-11},\ 0,\ 0,\ 0,\ 1.0588]$ \\
+18 & $[123782.3843,\ 4.0003,\ 0,\ 0,\ 0,\ 0,\ -0.0197,\ 8.601\times10^{-4},\ -6.266\times10^{-5},\ 2.799\times10^{-6},\ 0,\ 9.416\times10^{-9},\ -3.534\times10^{-10},\ 0,\ 0,\ 0,\ 0,\ 1.0556]$ \\
+19 & $[248525.3548,\ -64.0024,\ 36.9062,\ 0,\ 12.6922,\ -10.9437,\ -0.8575,\ 0.0264,\ -1.722\times10^{-3},\ 7.359\times10^{-5},\ 3.949\times10^{-6},\ 0,\ 0,\ -5.827\times10^{-10},\ 3.819\times10^{-11},\ 0,\ -8.009\times10^{-14},\ 2.563\times10^{-15},\ 1.0526]$ \\
+20 & $[491599.6122,\ 0,\ 0,\ 0,\ 203.4072,\ 0,\ 50.2885,\ 0,\ 0,\ 0,\ 0,\ 5.865\times10^{-6},\ -2.537\times10^{-7},\ 0,\ 0,\ 0,\ -1.685\times10^{-12},\ 0,\ 0,\ 1.0500]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent \textbf{Discussion}
+
+The solutions shown above are obviously not correct. All of the solutions should be
+all 1s, but instead, there are zeros, really small decimals, and large numbers. This 
+is due to the round of errrors introducted by floating point computations. A 64 bit 
+floating point integer has a fixed amount of bits to represent the mantissa of a decimal 
+value. Because of the limited number bits to represent a decimal, there is some amount of
+error created when representing a small decimal number. When using these approximated numbers 
+in computations, espescially in numerically unstable algorithms like gaussian elimination,
+the error of said approximation gets propagated throughout the operations, resulting in
+numbers that are incorrect.   
 \end{document}
