@@ -1,0 +1,141 @@
+\documentclass{report}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, mathtools, array, booktabs, hyperref, amsfonts}
+
+\title{Homework 2}
+
+\author{Darin Peries}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+
+\subsection*{Part 1}
+
+To prove that any $A\in\mathbb{C}^{n\times n}$ follows the relation below, 
+$$n^{-1} \| A \|_2 \leq n^{-1/2} \| A \|_{\infty} \leq \| A \|_2 \leq n^{1/2} \|A\|_1 \leq n \|A\|_2$$
+In order to prove that the relation holds for all $A\in\mathbb{C}^{n\times n}$,
+we need to rewrite the norm as $\|A\|=\sup\{\|Au\|, \ \|u\|=1\}=\frac{\|Au\|}{\|u\|}$.
+The next step will involve the Holder inequality. This involves splitting the norm into two
+norms being multiplied, resulting in, for example the 1-norm, 
+$$\|Au\|_1 \leq  (\sum\limits_{i=1}^n |Au_{i}|^2)^{1/2} \times (\sum\limits_{i=1}^n |1|^2)^{1/2}=\sqrt{n}\|Au\|_2 $$ 
+From the above expression, we can say that $\sup\{\|Au\|_1\} \leq \sqrt{n}\sup\{\|Au\|_2\}$ or $\|A\|_1 \leq \sqrt{n}\|A\|_2$.
+This gives us a part of the relation. The idea can then be extended to both the 2-norm and infinity norm as follows. 
+$\|Au\|^2_2=(\sqrt{\sum\limits_{i=1}^n|Au_i|^2})^2 \times 1 \leq \||Au|^2\|_{\infty} \|1\|_1=n\||Au|^2\|_{\infty}$. Which can then
+be rewritten as $\|A\|_2 \leq \sqrt{n}\|A\|_{\infty}$ by taking the square root of both sides. For the 2-norm and 1-norm,
+we know that the $\|A\|_{\infty} \leq n\|A\|_1$ and an upper bound of the 2-norm is $\sqrt{\|A\|_1\|A\|_{\infty}}$  
+via the properties of the spectral radius covered in class, so we can then say $\|A\|_2 \leq \sqrt{\|A\|_1\|A\|_{\infty}}\leq \sqrt{\|A\|_1n\|A\|_1}=\sqrt{n}\|A\|_1$. 
+Lastly, $\|A\|_{\infty} \leq n\|A\|_1 \leq n \sqrt{n} \|A\|_2$. This gives us the following
+terms:
+\begin{enumerate}
+    \centering
+    \item $\|A\|_1 \leq \sqrt{n} \|A\|_2$
+    \item $\|A\|_2 \leq \sqrt{n} \|A\|_{\infty}$
+    \item $\|A\|_2 \leq \sqrt{n} \|A\|_1$
+    \item $\|A\|_{\infty} \leq n^{3/2} \|A\|_2$
+\end{enumerate}
+
+\noindent By scaling the bounds appropriately, say dividing by $n$, the relation can be upheld.
+
+$$n^{-1}(\|A\|_2 \leq n^{1/2} \|A\|_{\infty}) \leq n^{-1/2}(n^{3/2}\|A\|_{2} \leq \sqrt{n} \|A\|_{1}) \leq n\|A\|_2$$ 
+
+\subsection*{Part 2}
+
+To prove that $\|x\| = \max\limits_{i=1,\dots,n}w_i|x_i|$ is a norm on $\mathbb{R}^n$, we need to show that it holds
+the following:
+\begin{enumerate}
+    \item $\|x+y\| \leq \|x\| + \|y\|$
+    \item $\|\lambda x\| = |\lambda|\|x\|$
+    \item $\|x\| = 0 \iff x = 0$
+\end{enumerate}
+
+\subsubsection*{Triangle inequality}
+
+$\|x+y\|=\max\limits_{i=1,\dots,n} w_i|x_i + y_i| = \max\limits_{i=1,\dots,n} |w_ix_i + w_iy_i| \leq \max\limits_{i=1,\dots,n} |w_ix_i| + \max\limits_{i=1,\dots,n} |w_iy_i| = \|x\| + \|y\|$
+, via the subadditivity of the max function.
+
+\subsubsection*{Positivity}
+
+A norm on $\mathbb{R}^n$ needs to be $\geq 0$. In order to prove this, the first step involves assuming $x=0$. 
+By assuming $x=0$ where $x\in\mathbb{R}^n$, the resulting norm is as follows:
+
+$$\max\limits_{i=1,\dots,n} (w_i * 0, w_{i+1} * 0, \dots, w_n * 0) = 0$$
+
+\noindent This shows that $\|x\|=0 \Longrightarrow x=0$. Now the second step assumes that $\|x\|=0$ and we need to prove that $x=0$.
+Looking at the norm, $\max\limits_{i=1,\dots,n} w_i\|x_i\|$ can only be negative if $w_i$ is negative. Since $w_i$ is a positive
+number, the norm being negative is not possible. Further more, the max function garuntees that the norm is non zero as long as some
+$x_i>0$ for all $i$. Therefore, in order for $\|x\|=0$, $x=0$.
+
+\subsubsection*{Homogeniety}
+
+Given some scalar $\lambda\in\mathbb{R}$,
+\[
+\begin{aligned}
+\|\lambda x\|
+&= \max_{i=1,\dots,n} w_i|\lambda x_i|
+= \max_{i=1,\dots,n} |\lambda|w_i|x_i| \\
+&= |\lambda|\max_{i=1,\dots,n} w_i|x_i|
+= |\lambda|\|x\|.
+\end{aligned}
+\]
+
+\noindent Because the weights are all positive integers, and the max is taken over all the absolute values of x, the norm is greter than or equal to zero.
+Since all three postiulates have been proven, $\|x\| = \max\limits_{i=1,\dots,n}w_i|x_i|$ is a norm on $\mathbb{R}^n$.
+
+\subsubsection*{Subordinate Matrix Norm}
+A subordinate matrix norm is the largest factor by which matrix can stretch a vector measured by a vetor norm.
+
+\section*{Problem 2}
+
+To prove that $\|A\|_1:=\max\limits_{x\neq 0} \frac{\|Ax\|}{\|x\|} = \max\limits_{j=1,\dots,n} \sum\limits_{i=1}^n |a_{ij}|$,
+the definition of an induced matrix norm needs to be re-visited. 
+$$\|A\| = \sup\limits_{\|u\|=1}\{Au\}$$ 
+
+\noindent By definition of a supremum, the induced norm of $A$ needs to be greater than or equal to all elements in the resulting dot product for any unit vector $u$, ie an upper bound.
+In order to find this, let $u$ be a vector of all zeros except for some index $j$ being equal to $1$ and thus satisfies $\|u\|_1=1$. By computing the dot product of $Au$, the $j^{th}$ column is 
+extracted. The norm of the resulting vector is $\sum\limits_{i=1}^n |Au_i|$. In order to find an upper bound, multiply the matrix by a set of vectors $u$ where each vector in the set
+is zero except some index $j$ equal to $1$. No vectors in the set have the same non zero $j$. For each vector, compute the dot product
+and the 1-norm. Once all norms have been calculated, take the maximum norm as the upper bound of the induced matrix 1-norm.
+Therefore, the upper bound, or supremum, of $\|A\|_1$ is $\max\limits_{j=1,\dots,n} \sum\limits_{i=1}^n |a_{ij}|$.
+
+\section*{Problem 3}
+\subsection*{Part 1}
+To show that $A$ is non-singular by $\|Ax\| \geq \theta \|x\|, \ \forall x$, first set $x$ to zero. Since $\|.\|$ is a norm on $\mathbb{R}^n$,
+$x$ needs to be zero in order for the norm to be zero. This means that the $kern(A)=\{0\}$. Because the the kernel of $A$
+is only the zero vector, the matrix is invertible, a.k.a non-singular. \\
+
+\noindent Since $A$ is invertible, to show that $\|A^{-1}\|\leq \theta^{-1}$, say there is some vectopr $y$, where $Ax=y$ and $A^{-1}y=x$.
+Since $\|Ax\| \geq \theta\|x\|$, then $\|y\| \geq \theta \|A^{-1}y\|$. Rearranging both sides, the expression is as follows, 
+$\frac{1}{\theta} \geq \frac{\|A^{-1}y\|}{\|y\|}$, which can be rewritten as $\frac{1}{\theta} \geq \sup\{\|A^{-1}y\|\}$, or more simply as
+$\theta^{-1} \geq \|A^{-1}\|$.
+
+\subsection*{Part 2}
+To show that $A$ is invertible based on $\|I-P(A)\|\leq1$, the Neuman series can be used. This is because the norm of $A-I$ is less than $1$. The series is as follows:
+
+$$(I-A)^{-1} = \sum\limits_{i=0}^{\infty} A^i$$
+
+\noindent Substituting $A$ with $I-P(A)$ gives $P(A)^{-1}=\sum\limits_{i=0}^{\infty}(I-P(A))^i$. Since $P$ is a polynomial with no constant terms,
+$A$ can be factored out of the matrix, resulting in $(AG(A))^{-1} = \sum\limits_{i=0}^{\infty} (I-P(A))^i$, where $G(A)$ is the resulting polynomial 
+with one constant term after $A$ is factored out. Rewritting the expression, $A^{-1} = G(A)\sum\limits_{i=0}^{\infty}(I-P(A))^i$.
+
+\section*{Problem 4}
+\subsection*{part 1}
+If $A$ is positive symmetric definite, then its diagonals must be $>0$. Say there is a unit vector $e_k$, where all entries are zero except for the entry at 
+index k, which is set to $1$. using the quadratic form, $<e_kA,\ e_k^T>$, The only influencing entry in the matrix that determines whether the scalar result is positive is
+the $k^{th}$ diagonal. If the quadratic form is computed from $k=1$ to $n$, the products should all be $>0$.
+
+\subsection*{part 2}
+Say there is some vector $x\in\mathbb{R}^n$ and on index $i$, $x_i=\alpha$ and on index $j$, $x_j=1$ with zeroes everywhere else.
+By using the quadratic form $<Ax, \ x^T>$, the following vector and equation are generated.
+
+$$Ax = ((\alpha a_{1i} + a_{1j}), \dots ,(\alpha a_{ii} + a_ij), \dots, (\alpha a_{ji} + a_jj)), \dots, (\alpha a_{ni}+a_{nj})$$
+
+$$<Ax, x^T> = \alpha^2 a_{ii} + \alpha a_{ij} + \alpha a_{ji} + a_{jj} = \alpha^2 a_{ii} + 2\alpha a_{ij} + a_{jj}$$
+
+\noindent When factoring the equation above, the roots of the polynomial are $a_{ii}(\alpha+\frac{a_{ij}}{a_{ii}})^2+(a_{jj}+\frac{a_{ij}^2}{a_{jj}})=(a_{jj}-\frac{a_{ij}^2}{a_{ii}}) > 0$.
+Rearranging the equation gives $a_{ii}a_{jj} > a_{ij}^2$.
+\end{document}
