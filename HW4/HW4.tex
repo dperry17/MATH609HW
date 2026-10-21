@@ -1,0 +1,128 @@
+\documentclass{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, mathtools, array, booktabs, hyperref, amssymb}
+
+\title{HW 4}
+
+\author{Darin Peries}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\href{URL}{text}
+
+\section*{Problem 1}
+
+Prove that $\|v\|_B := \sqrt{v^*Bv}$ defines a norm on $\mathbb{C}^n$ given that $B$ is both positive definite and hermitian. \\
+
+\subsection*{Proof for homogeneity}
+
+Given $\lambda \in \mathbb{C}$ and $x \in \mathbb{C}^n$. $\|\lambda x\|_B = \sqrt{(\lambda^* x^*)B(\lambda x)} = \sqrt{|\lambda|^2 x^*Bx}=|\lambda|\sqrt{x^*Bx}=|\lambda|\|x\|_B$.
+Therefore the norm maintains homogeneity.
+
+\subsection*{Proof for triangle inequality}
+
+Given $x,\ y\in\mathbb{C}^n$, $\|x + y\|_B = \sqrt{(x+y)^*B(x+y)} = \sqrt{(x^* + y^*)B(x + y)} = \sqrt{(x^*B + y^*B)(x+y)} = \sqrt{x^*Bx + x^*By + y^*Bx + y^*By}$. Because
+matrix $B$ is hermitian, $(x^*By)^* = y^*Bx$. Therefore, the expression can be rewritten as $\sqrt{x^*Bx + 2\operatorname{Re}(y^*Bx) + y^*By}$. Using the fact that $\operatorname{Re}(z) \leq |z|$ and the Cauchy-Schwarz inequality 
+for the $B$-inner product (which works since conjugate symmetry holds due to hermitian and positive definiteness gives positivity), $|\langle a, \ b \rangle_B| \leq \|a\|_B \|b\|_B = \sqrt{a^*Ba} \sqrt{b^*Bb}$, given that $|\langle a, \ b \rangle_B| = |a^*Bb|$. The expression can further be rewritten
+as 
+\[ \begin{gathered} \sqrt{x^*Bx + 2\operatorname{Re}(y^*Bx) + y^*By} \leq \sqrt{x^*Bx + 2|y^*Bx| + y^*By} \leq \\
+ \sqrt{x^*Bx + 2\sqrt{y^*By}\sqrt{x^*Bx} + y^*By} = \sqrt{(\sqrt{x^*Bx} + \sqrt{y^*By})^2} = \sqrt{(\|x\|_B + \|y\|_B)^2}=\|x\|_B + \|y\|_B \end{gathered} \]
+
+\noindent From the expression above, $\|x+y\|_B \leq \|x\|_B + \|y\|_B$ and the triangle inequality hold.
+
+\subsection*{Proof for Non-negativity and definiteness}
+
+Since $B$ is hermitian, $(x^*Bx)^* = x^*B^*x^{**}= x^*Bx$, and becuase $B$ is positive definite, $x^*Bx$ is strictly greater than zero and real.
+for $x\neq 0$. Therefore, $\|x\|_B$ is positive and real for $x \neq 0$ and $\|0\|_B=0$. Non-negativity and definiteness is upheld.\\
+
+\noindent From the three proofs above, $\| \cdot \|_B$ is a proper norm in $\mathbb{C}^n$.
+
+\section*{Problem 2}
+
+Given an A-orthonormal system, prove that $A$ is symmetric-positive definite.\\ 
+
+\noindent Defining a matrix $U\in\mathbb{R}^{n\times n}$ using the column vectors of the A-orthonormal system, $U^TAU=I$, 
+as the multiplication of the A-orthonormal matrices and $A$ should produce the identity matrix. Additionally, If $\sum_i c_iu(i) = 0$, multiplying on the left by $u(j)^TA$ gives $c_j = 0$ for each $j$.
+So the columns of $U$ are independent, and $U$ is invertible. By transposing $$(U^TAU)=I=I^T=(U^TAU)^T=U^TA^TU=U^TAU$$ 
+Because the equation holds, and the fact that $U$ is invertible due to being a square matrix and having linearly independent column vectors, 
+multiplying the prior equation by $U^{-T}$ on the left and $U^{-1}$ on the right gives $A=A^T$. Therefore, $A$ is symmetric. 
+Say for all $x\in \mathbb{R}^n$ and $x \neq 0$, $v=U^{-1}x; \ x = Uv$. $x^TAx=v^TU^TAUv=v^TIv=v^Tv>0$. Therefore $A$ is positive definite.
+
+
+\section*{Problem 3}
+
+Prove that $2Q_A(v) = (e,e)_A - (u,u)_A$, given that $Q_A(v) := \frac{1}{2}(v,v)_A - (b,v)_I$ and $Au=b, \ (b,v)_I=b^Tv$\\
+
+\noindent $2Q_A(v) = (v,v)_A - 2(b,v)_I = (v,v)_A - 2(Au, v)_I$. Because $(b,v)_I = b^Tv$, $(Au, v)_I = (Au)^Tv = u^TA^Tv = u^TAv = (u, v)_A$ due to symmetry.
+Therefore, the expression can be written as $(v,v)_A - 2(u,v)_A$. By completing the square through adding and subtracting $(u,u)_A$, the new 
+expression is 
+$$ (v,v)_A - 2(u,v)_A + (u,u)_A - (u,u)_A = (v-u,v-u)_A - (u,u)_A = (e,e)_A - (u,u)_A $$.
+
+\section*{Problem 4}
+
+\subsection*{Part 1}
+
+\begin{table}[ht]
+\centering
+\caption{Approximate solution vectors obtained with conjugate gradient (CG)
+and gradient descent (GD) for both matrices $A_1, \ A_2$.}
+\label{tab:solution-vectors}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c c p{11cm}}
+\hline
+Method & Matrix & Solution vector $x^T$ \\
+\hline
+
+CG & $A_1$ &
+\texttt{[0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333,} \newline
+\texttt{ 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333]} \\[0.75em]
+
+CG & $A_2$ &
+\texttt{[0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333,} \newline
+\texttt{ 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333,} \newline
+\texttt{ 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333,} \newline
+\texttt{ 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333]} \\[0.75em]
+
+GD & $A_1$ &
+\texttt{[0.333, 0.333, 0.335, 0.333, 0.332, 0.332, 0.332, 0.334,} \newline
+\texttt{ 0.335, 0.335, 0.335, 0.335, 0.334, 0.333, 0.332, 0.330]} \\[0.75em]
+
+GD & $A_2$ &
+\texttt{[0.333, 0.333, 0.332, 0.334, 0.335, 0.334, 0.334, 0.333,} \newline
+\texttt{ 0.332, 0.332, 0.332, 0.332, 0.332, 0.333, 0.333, 0.334,} \newline
+\texttt{ 0.334, 0.334, 0.335, 0.335, 0.335, 0.335, 0.335, 0.335,} \newline
+\texttt{ 0.335, 0.334, 0.334, 0.333, 0.332, 0.332, 0.331, 0.330]} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{Part 2}
+
+\begin{table}[ht]
+\centering
+\caption{Solutions obtained using different iterative methods.}
+\label{tab:iterative-solutions}
+\begin{tabular}{c c}
+\hline
+Method & Approximate solution $x^T$ \\
+\hline
+Jacobi &
+\texttt{[1.0, -2.0, 3.0, -2.0, 1.0]} \\
+
+Gauss--Seidel &
+\texttt{[1.0, -2.0, 3.0, -2.0, 1.0]} \\
+
+Gradient Descent &
+\texttt{[1.0, -2.0, 3.0, -2.0, 1.0]} \\
+
+Conjugate Gradient &
+\texttt{[1.0, -2.0, 3.0, -2.0, 1.0]} \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
