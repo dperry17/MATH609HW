@@ -1,0 +1,317 @@
+\documentclass{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, mathtools, array, booktabs, hyperref, amssymb}
+
+\title{HW 6}
+
+\author{Darin Peries}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+
+The two point boundary value problem: 
+
+$$-\phi'' + (4x^2 + 2)\phi = 0, \ \phi(0)=1, \ \phi(1)=e$$
+
+\noindent With solution $\phi(x) = e^{x^2}$.
+
+\noindent Using the fourth order finite-difference scheme, the resulting matrix is:
+
+\[
+    A = \begin{pmatrix}
+        30 + 12h^2(4x^2+2) & -16 & 1 & 0 & 0 & \dots \\
+        -16 & 30 + 12h^2(4x^2+2) & -16 & 1 & 0 & 0 & \dots \\
+        1 & -16 & 30 + 12h^2(4x^2+2) & -16 & 1 & 0 & 0 & \dots \\ 
+        0 & 1 & -16 & 30 + 12h^2(4x^2+2) & -16 & 1 & 0 & 0 & \dots\\
+        \vdots \ddots
+    \end{pmatrix}
+\]
+
+\subsection*{Error Tables}
+
+\begin{table}[h!]
+\centering
+\caption{Error results using the Thomas algorithm.}
+\begin{tabular}{|c c c c c|}
+\hline
+$h$ &
+$\|u_h-\phi_h\|_\infty$ &
+$\dfrac{\|u_h-\phi_h\|_\infty}{h^3}$ &
+$\dfrac{\|u_h-\phi_h\|_\infty}{h^4}$ &
+$\dfrac{\|u_h-\phi_h\|_\infty}{h^5}$ \\
+\hline
+$0.5$ &
+$6.8077066\times10^{-2}$ &
+$5.4461653\times10^{-1}$ &
+$1.0892331$ &
+$2.1784661$ \\
+
+$0.25$ &
+$1.6671510\times10^{-2}$ &
+$1.0669766$ &
+$4.2679065$ &
+$1.7071626\times10^{1}$ \\
+
+$0.125$ &
+$2.0444497\times10^{-3}$ &
+$1.0467582$ &
+$8.3740659$ &
+$6.6992527\times10^{1}$ \\
+
+$0.0625$ &
+$1.8761033\times10^{-4}$ &
+$7.6845190\times10^{-1}$ &
+$1.2295230\times10^{1}$ &
+$1.9672369\times10^{2}$ \\
+
+$0.03125$ &
+$1.4352246\times10^{-5}$ &
+$4.7029440\times10^{-1}$ &
+$1.5049421\times10^{1}$ &
+$4.8158146\times10^{2}$ \\
+
+$0.015625$ &
+$1.0286328\times10^{-6}$ &
+$2.6964993\times10^{-1}$ &
+$1.7257595\times10^{1}$ &
+$1.1044861\times10^{3}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Error results using gradient descent.}
+\begin{tabular}{|c c c c c|}
+\hline
+$h$ &
+$\|u_h-\phi_h\|_\infty$ &
+$\dfrac{\|u_h-\phi_h\|_\infty}{h^3}$ &
+$\dfrac{\|u_h-\phi_h\|_\infty}{h^4}$ &
+$\dfrac{\|u_h-\phi_h\|_\infty}{h^5}$ \\
+\hline
+$0.5$ &
+$6.8077066\times10^{-2}$ &
+$5.4461653\times10^{-1}$ &
+$1.0892331$ &
+$2.1784661$ \\
+
+$0.25$ &
+$1.6671510\times10^{-2}$ &
+$1.0669766$ &
+$4.2679065$ &
+$1.7071626\times10^{1}$ \\
+
+$0.125$ &
+$2.0444496\times10^{-3}$ &
+$1.0467582$ &
+$8.3740656$ &
+$6.6992525\times10^{1}$ \\
+
+$0.0625$ &
+$1.8761023\times10^{-4}$ &
+$7.6845151\times10^{-1}$ &
+$1.2295224\times10^{1}$ &
+$1.9672359\times10^{2}$ \\
+
+$0.03125$ &
+$1.4352103\times10^{-5}$ &
+$4.7028972\times10^{-1}$ &
+$1.5049271\times10^{1}$ &
+$4.8157667\times10^{2}$ \\
+
+$0.015625$ &
+$1.0282268\times10^{-6}$ &
+$2.6954349\times10^{-1}$ &
+$1.7250784\times10^{1}$ &
+$1.1040502\times10^{3}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{table}[h!]
+\centering
+\caption{Error results using the conjugate gradient method.}
+\begin{tabular}{|c c c c c|}
+\hline
+$h$ &
+$\|u_h-\phi_h\|_{\infty}$ &
+$\dfrac{\|u_h-\phi_h\|_{\infty}}{h^3}$ &
+$\dfrac{\|u_h-\phi_h\|_{\infty}}{h^4}$ &
+$\dfrac{\|u_h-\phi_h\|_{\infty}}{h^5}$ \\
+\hline
+$0.5$ &
+$6.8077066 \times 10^{-2}$ &
+$5.4461653 \times 10^{-1}$ &
+$1.0892331$ &
+$2.1784661$ \\
+
+$0.25$ &
+$1.6671510 \times 10^{-2}$ &
+$1.0669766$ &
+$4.2679065$ &
+$1.7071626 \times 10^{1}$ \\
+
+$0.125$ &
+$2.0444497 \times 10^{-3}$ &
+$1.0467582$ &
+$8.3740658$ &
+$6.6992527 \times 10^{1}$ \\
+
+$0.0625$ &
+$1.8761032 \times 10^{-4}$ &
+$7.6845186 \times 10^{-1}$ &
+$1.2295230 \times 10^{1}$ &
+$1.9672368 \times 10^{2}$ \\
+
+$0.03125$ &
+$1.4352247 \times 10^{-5}$ &
+$4.7029444 \times 10^{-1}$ &
+$1.5049422 \times 10^{1}$ &
+$4.8158151 \times 10^{2}$ \\
+
+$0.015625$ &
+$1.0286984 \times 10^{-6}$ &
+$2.6966712 \times 10^{-1}$ &
+$1.7258696 \times 10^{1}$ &
+$1.1045565 \times 10^{3}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection*{Error Plots}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{thomas_errors.png}
+    \caption{Errors from the Thomas Algorithm}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{cg_errors.png}
+    \caption{Errors from the Conjugate Gradient Algorithm}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{gd_errors.png}
+    \caption{Errors from the Gradient Descent Algorithm}
+\end{figure}
+
+\newpage
+
+\subsection*{Discussion}
+
+The main trend from the columns comes from the fact that as $h$ decreases, the error also decreases.
+When dividing by the grid spacing, the error will converge to some constant based on the order of the discritization method.
+Based on the results, the behavior trends towards an $h^4$ order of approximation.
+
+\section*{Problem 2}
+
+The temperature distribution $\Phi$ on a metal plate $[0,1]\times[0,1]$ with no heat source is given by the equation:
+
+$$\Phi_{xx} + \Phi_{yy} = 0, \ (x, \ y)\in (0, \ 1) \times (0,\ 1)$$
+
+\noindent The matrix created from the five-point stencil is:
+
+$$A_h = I_m \otimes T_m + T_m \otimes I_m$$
+
+\[
+    T_m = \begin{pmatrix}
+            2 & -1 & 0 & \dots & 0 & 0 \\
+            -1 & 2 & -1 & 0 & \dots & 0\\
+            0 & -1 & 2 & -1 & 0 & \dots & \\
+            \vdots & \ddots
+        \end{pmatrix}
+\]
+
+\subsection*{Residual Tables}
+
+\begin{table}[h!]
+\centering
+\caption{Jacobi iteration results for the two-dimensional Laplace problem.}
+\begin{tabular}{|c c c c|}
+\hline
+$h$ & $k$ &
+$\displaystyle \frac{\|r_h^{(k)}\|_\infty}
+{\|r_h^{(k-1)}\|_\infty}$ &
+$\rho(B_J)$ \\
+\hline
+$1/4$  & 11 & 0.500488 & 0.707107 \\
+$1/8$  & 32 & 0.971291 & 0.923880 \\
+$1/16$ & 65 & 0.958709 & 0.980785 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Gauss--Seidel iteration results for the two-dimensional Laplace problem.}
+\begin{tabular}{|c c c c|}
+\hline
+$h$ & $k$ &
+$\displaystyle \frac{\|r_h^{(k)}\|_\infty}
+{\|r_h^{(k-1)}\|_\infty}$ &
+$\rho(B_{GS})$ \\
+\hline
+$1/4$  & 7  & 0.502953 & 0.500000 \\
+$1/8$  & 19 & 0.857683 & 0.853553 \\
+$1/16$ & 36 & 0.955950 & 0.961940 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Optimal SOR iteration results for the two-dimensional Laplace problem.}
+\begin{tabular}{|c c c c c|}
+\hline
+$h$ & $\omega_\ast$ & $k$ &
+$\displaystyle \frac{\|r_h^{(k)}\|_\infty}
+{\|r_h^{(k-1)}\|_\infty}$ &
+$\rho(B_{\omega_\ast})$ \\
+\hline
+$1/4$  & 1.171573 & 5  & 0.068282 & 0.171573 \\
+$1/8$  & 1.446463 & 11 & 0.649997 & 0.446463 \\
+$1/16$ & 1.673514 & 23 & 0.840870 & 0.673514 \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\subsection*{Consecutive residual Plot}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{residual_ratios.png}
+    \caption{Dashed lines are $\rho(B)$}
+\end{figure}
+
+\subsection*{Discussion}
+
+As $h$ increases, the final consecutive residual ratio decreases, which is seen across all algorithms with the slight exception of the 
+Jacobi method. The consecutive ratio for the Gauss-Seidel method is almost identical to the spectral radius of $B_{GS}$, since the spectral radius is much smaller
+and the method converges at a faster rate. The Jacobi method has a larger spectral radius, so the ratio is greater than or equal to the Gauss-Seidel.
+Lastly, the SOR has the smallest spectral radius and the consecutive residual ratio is the smallest.
+
+\newpage
+
+\subsection*{Iterative Methods Consecutive-Residual plots}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{gd_cg_residual_ratios.png}
+\end{figure}
+
+\noindent The initial guess was $x^{(0)}=0$ and the tolerance is $\epsilon = 1e-8$.
+
+\end{document}
